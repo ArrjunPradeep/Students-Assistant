@@ -4,25 +4,7 @@ const axios = require('axios')
 const config = require('../config')
 const fileUpload = require('express-fileupload');
 const CircularJSON = require('circular-json');
-// const fs = require('fs');
-// const path = require('path');
-// const imageConversion = require('image-conversion')
-// const imageToBase64 = require('image-to-base64');
-// const datauri = require('datauri/sync');
-// const { imgPath } = require('../config');
-// const { htmlToText } = require('html-to-text');
-// const { MathpixMarkdownModel } = require('mathpix-markdown-it');
 const imageDataURI = require('image-data-uri')
-
-// const Window = require('window');
-// const window = new Window();
-// global.window = window;
-// global.document = window.document;
-
-// const jsdom = require("jsdom");
-// const { JSDOM } = jsdom;
-// global.DOMParser = new JSDOM().window.DOMParser;
-
 
 router.use(fileUpload());
 

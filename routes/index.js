@@ -5,8 +5,11 @@ const config = require('../config')
 const fileUpload = require('express-fileupload');
 const CircularJSON = require('circular-json');
 const imageDataURI = require('image-data-uri')
+const rateLimit = require('../middlewares/rateLimiter');
+const rateLimiter = require('../middlewares/rateLimiter');
 
 router.use(fileUpload());
+router.use(rateLimit)
 
 router.post("/decodeImage", async (req, res, next) => {
   try {
@@ -37,7 +40,7 @@ router.post("/decodeImage", async (req, res, next) => {
     let mediaType = imgType[1];
 
     // I M A G E    D A T A    U R I 
-    var dataURI = imageDataURI.encode(dataBuffer, mediaType)
+    var dataURI = await imageDataURI.encode(dataBuffer, mediaType)
 
     const body = {
       "src": dataURI,

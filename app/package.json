@@ -17,5 +17,9 @@
     "find-config": "^1.0.0",
     "image-data-uri": "^2.0.1",
     "morgan": "~1.9.1"
-  }
+  },
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

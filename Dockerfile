@@ -1,13 +1,11 @@
 FROM node:10
 
-WORKDIR /chatBot
-
-COPY package*.json ./
+RUN mkdir -p /home/app
 
 RUN npm install
 
-COPY . .
+COPY ./app /home/app
 
-EXPOSE 3000
+EXPOSE 3690
 
 CMD ["npm","start"]

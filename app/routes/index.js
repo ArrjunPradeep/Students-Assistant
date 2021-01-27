@@ -59,6 +59,16 @@ router.post("/decodeImage", async (req, res, next) => {
 
     const modifiedText = data.replace(/(\\\r\n|\n|\r|\\)/gm, '')
     console.log("MODIFIED TEXT:",modifiedText)
+
+    let solutionsInfo = await solutionsModel.findOne({question:modifiedText}).lean().exec()
+
+    if(solutionsInfo!=null){
+      return res.send({
+        message: solutionsInfo.answer,
+        result: true
+      })
+    }
+
     return res.send({
       message: modifiedText,
       result: true

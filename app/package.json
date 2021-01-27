@@ -16,6 +16,7 @@
     "express-rate-limit": "^5.2.3",
     "find-config": "^1.0.0",
     "image-data-uri": "^2.0.1",
+    "mongoose": "^5.11.13",
     "morgan": "~1.9.1"
   },
   "main": "app.js",

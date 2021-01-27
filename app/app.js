@@ -2,6 +2,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const config = require('./config/config')
+const mongoose = require('mongoose');
+
+mongoose.connect(
+	'mongodb://' +
+	config.db.userName +
+	':' +
+	config.db.password +
+	'@' +
+	config.db.host +
+	':' +
+	config.db.port +
+	'/' +
+	config.db.dbName
+);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

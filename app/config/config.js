@@ -10,7 +10,8 @@ module.exports = {
         port: process.env.DB_PORT,
         userName: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
-        dbName: process.env.DB_NAME
+        dbName: process.env.DB_NAME,
+        authSource: "admin"
     }
 
 }

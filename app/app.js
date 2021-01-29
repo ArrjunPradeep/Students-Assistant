@@ -16,7 +16,15 @@ mongoose.connect(
 	config.db.port +
 	'/' +
 	config.db.dbName
-);
+/* +
+        '?authSource=admin'
+*/
+).then(() => {
+console.log("-----------------MONGODB_CONNECTED--------------------");
+}).catch((err) => {
+    console.log("-----------------MONGODB_NOT_CONNECTED------------------------", err);
+});
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');

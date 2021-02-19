@@ -29,6 +29,7 @@ router.post("/decodeImage", async (req, res, next) => {
     const body = {
       "src": imageurl,
       "formats": ["text", "data", "html", "latex_styled"],
+      "include_line_data": true,
       "data_options": {
         "include_asciimath": true,
         "include_latex": true

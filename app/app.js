@@ -5,25 +5,25 @@ var logger = require('morgan');
 const config = require('./config/config')
 const mongoose = require('mongoose');
 
-// mongoose.connect(
-// 	'mongodb://' +
-// 	config.db.userName +
-// 	':' +
-// 	config.db.password +
-// 	'@' +
-// 	config.db.host +
-// 	':' +
-// 	config.db.port +
-// 	'/' +
-// 	config.db.dbName
-// /* +
-//         '?authSource=admin'
-// */
-// ).then(() => {
-// console.log("-----------------MONGODB_CONNECTED--------------------");
-// }).catch((err) => {
-//     console.log("-----------------MONGODB_NOT_CONNECTED------------------------", err);
-// });
+mongoose.connect(
+	'mongodb://' +
+	config.db.userName +
+	':' +
+	config.db.password +
+	'@' +
+	config.db.host +
+	':' +
+	config.db.port +
+	'/' +
+	config.db.dbName
+/* +
+        '?authSource=admin'
+*/
+).then(() => {
+console.log("-----------------MONGODB_CONNECTED--------------------");
+}).catch((err) => {
+    console.log("-----------------MONGODB_NOT_CONNECTED------------------------", err);
+});
 
 
 var indexRouter = require('./routes/index');

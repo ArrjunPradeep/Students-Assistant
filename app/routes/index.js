@@ -83,7 +83,6 @@ router.post("/decodeImage", async (req, res, next) => {
       if(solutionsInfo!=null){
         return res.send({
           message: solutionsInfo.answer,
-          message: result,
           result: true
         })
       }

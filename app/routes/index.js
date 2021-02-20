@@ -7,6 +7,7 @@ const CircularJSON = require('circular-json');
 const imageDataURI = require('image-data-uri')
 const rateLimit = require('../middlewares/rateLimiter');
 const solutionsModel = require('../models/solutions')
+require('array-foreach-async');
 
 router.use(fileUpload());
 router.use(rateLimit)
@@ -32,7 +33,8 @@ router.post("/decodeImage", async (req, res, next) => {
       "include_line_data": true,
       "data_options": {
         "include_asciimath": true,
-        "include_latex": true
+        "include_latex": true,
+        "include_mathml": true
       }
     }
 
@@ -58,22 +60,34 @@ router.post("/decodeImage", async (req, res, next) => {
       })
     }
 
-    const modifiedText = data.replace(/(\\\r\n|\n|\r|\\)/gm, '')
-    console.log("MODIFIED TEXT:",modifiedText)
+    let decodeInfo = result.line_data
+    let diagramDetections =[]
 
-    let solutionsInfo = await solutionsModel.findOne({question:modifiedText}).lean().exec()
+    decodeInfo.forEach(result => {
+      diagramDetections.push(result.type)
+    });
 
-    if(solutionsInfo!=null){
+    if(diagramDetections.includes('diagram')){
+      console.log("DIAGRAM FOUND")
       return res.send({
-        message: solutionsInfo.answer,
+        message: imageurl,
         result: true
       })
-    }
+    }else{
+      console.log("DIAGRAM NOT FOUND")
+      const modifiedText = data.replace(/(\\\r\n|\n|\r|\\)/gm, '')
+      console.log("MODIFIED TEXT:",modifiedText)
 
-    return res.send({
-      message: modifiedText,
-      result: true
-    })
+      let solutionsInfo = await solutionsModel.findOne({question:modifiedText}).lean().exec()
+  
+      if(solutionsInfo!=null){
+        return res.send({
+          message: solutionsInfo.answer,
+          message: result,
+          result: true
+        })
+      }
+    }
 
   } catch (error) {
 

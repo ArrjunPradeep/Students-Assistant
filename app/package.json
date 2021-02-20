@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "array-foreach-async": "^1.0.1",
     "axios": "^0.21.0",
     "circular-json": "^0.5.9",
     "cookie-parser": "~1.4.4",

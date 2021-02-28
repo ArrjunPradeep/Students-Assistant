@@ -54,9 +54,12 @@ router.post("/decodeImage", async (req, res, next) => {
     const data = result.text;
 
     if (data == undefined || result.error == "Content not found") {
+      console.log("NOT FOUND")
       return res.status(422).send({
         status: "Fail",
-        message: "Content not found"
+        message: "Content Not Found",
+        result:false,
+        type:"nil"
       })
     }
 
@@ -70,8 +73,10 @@ router.post("/decodeImage", async (req, res, next) => {
     if(diagramDetections.includes('diagram')){
       console.log("DIAGRAM FOUND")
       return res.send({
+        status:"Success",
         message: imageurl,
-        result: true
+        result: true,
+        type:"diagram"
       })
     }else{
       console.log("DIAGRAM NOT FOUND")
@@ -81,9 +86,18 @@ router.post("/decodeImage", async (req, res, next) => {
       let solutionsInfo = await solutionsModel.findOne({question:modifiedText}).lean().exec()
   
       if(solutionsInfo!=null){
-        return res.send({
+        return res.status(200).send({
+          status:"Success",
           message: solutionsInfo.answer,
-          result: true
+          result: true,
+          type:"text"
+        })
+      }else{
+        return res.status(200).send({
+          status:"Success",
+          message: modifiedText,
+          result: true,
+          type:"text"
         })
       }
     }
@@ -92,9 +106,10 @@ router.post("/decodeImage", async (req, res, next) => {
 
     console.log("ERROR:", error)
 
-    res.status(500).send({
+    return res.status(500).send({
       status: "Fail",
-      error: error.message
+      message: error.message,
+      result:false
     })
   }
 });

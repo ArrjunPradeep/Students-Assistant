@@ -75,7 +75,7 @@ router.post("/decodeImage", async (req, res, next) => {
       return res.send({
         status:"Success",
         message: imageurl,
-        result: true,
+        result: false,
         type:"diagram"
       })
     }else{
@@ -96,7 +96,7 @@ router.post("/decodeImage", async (req, res, next) => {
         return res.status(200).send({
           status:"Success",
           message: modifiedText,
-          result: true,
+          result: false,
           type:"text"
         })
       }
